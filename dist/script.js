@@ -6,16 +6,20 @@ async function P2PMagic () {
   if (!Hls.isSupported()) {
     return displayError(new Error('Your Browser does not support the HTTP Live Streaming Protocol'))
   }
-
+//video should automatically size to fit
   const video = document.getElementById('video')
-  const bigBuckBunnyCID = 'QmdpAidwAsBGptFB3b6A9Pyi5coEbgjHrL3K2Qrsutmj9K'  
+//video filename is guanguan.mov
+//actual link https://ipfs.io/ipfs/QmdSM1wn5nUs4ujGSQbRSMkTRB55qVQUQe7AYFiE6QkLPx?filename=guagan.mov
+
+//hoping we only need CID
+  const GUAGANCIDCID = 'QmdSM1wn5nUs4ujGSQbRSMkTRB55qVQUQe7AYFiE6QkLPx'  
   
-  // Create an IPFS node inside your browser
+  // Create IPFS node inside your browser
   let node;
-  // Init a new repo for this run
+  // Init a new repo for this
   const repoPath = 'ipfs-' + Math.random()
   try {
-    // Instatiate your IPFS node
+    // Instatiate IPFS node
     node = await Ipfs.create({ repo: repoPath })
   } catch(err) {
     displayError(err)
@@ -23,7 +27,7 @@ async function P2PMagic () {
 
   const hls = new Hls()
   hls.config.ipfs = node
-  hls.config.ipfsHash = bigBuckBunnyCID
+  hls.config.ipfsHash = GUAGANCID
   hls.loadSource('master.m3u8')
   hls.attachMedia(video)
   hls.on(Hls.Events.MANIFEST_PARSED, () => video.play())
@@ -37,8 +41,8 @@ function displayError(err) {
   const spanElement = document.getElementById('errorText');
 
   spanElement.innerHTML = errorStr.includes('SecurityError'.toLowerCase()) 
-    ? 'You must use Chrome or Firefox to test this embedded app!' 
-    : 'Something went wrong. See the console to get further details.';
+    ? 'You must use Chrome or Firefox to use this embedded app!' 
+    : 'Uh oh! Something went wrong. See the console to get further details.';
 }
 
 P2PMagic()

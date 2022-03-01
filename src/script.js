@@ -8,7 +8,7 @@ async function P2PMagic () {
   }
 
   const video = document.getElementById('video')
-  const bigBuckBunnyCID = 'QmdpAidwAsBGptFB3b6A9Pyi5coEbgjHrL3K2Qrsutmj9K'  
+  const GUAGANCID = 'QmdSM1wn5nUs4ujGSQbRSMkTRB55qVQUQe7AYFiE6QkLPx'  
   
   // Create an IPFS node inside your browser
   let node;
@@ -23,7 +23,7 @@ async function P2PMagic () {
 
   const hls = new Hls()
   hls.config.ipfs = node
-  hls.config.ipfsHash = bigBuckBunnyCID
+  hls.config.ipfsHash = GUAGANCID
   hls.loadSource('master.m3u8')
   hls.attachMedia(video)
   hls.on(Hls.Events.MANIFEST_PARSED, () => video.play())
